@@ -234,10 +234,8 @@ init_fnc_t *init_sequence[] = {
 #ifdef CONFIG_OF_CONTROL
 	fdtdec_check_fdt,
 #endif
-	timer_init,		/* initialize timer */
-#ifdef CONFIG_FSL_ESDHC
 	get_clocks,
-#endif
+	timer_init,		/* initialize timer */
 	env_init,		/* initialize environment */
 	init_baudrate,		/* initialze baudrate settings */
 	serial_init,		/* serial communications setup */

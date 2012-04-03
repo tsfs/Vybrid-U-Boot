@@ -1,6 +1,9 @@
 #
-# Copyright 2000-2008
+# (C) Copyright 2012
 # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+#
+# (C) Copyright 2012 Freescale Semiconductor, Inc.
+# TsiChung Liew (Tsi-Chung.Liew@freescale.com)
 #
 # See file CREDITS for list of people who contributed to this
 # project.
@@ -12,7 +15,7 @@
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
@@ -23,33 +26,18 @@
 
 include $(TOPDIR)/config.mk
 
-LIB 	:= $(obj)libgpio.o
+LIB	= $(obj)lib$(SOC).o
 
-COBJS-$(CONFIG_AT91_GPIO)	+= at91_gpio.o
-COBJS-$(CONFIG_KIRKWOOD_GPIO)	+= kw_gpio.o
-COBJS-$(CONFIG_MARVELL_GPIO)	+= mvgpio.o
-COBJS-$(CONFIG_MARVELL_MFP)	+= mvmfp.o
-COBJS-$(CONFIG_MXC_GPIO)	+= mxc_gpio.o
-COBJS-$(CONFIG_MXS_GPIO)	+= mxs_gpio.o
-COBJS-$(CONFIG_PCA953X)		+= pca953x.o
-COBJS-$(CONFIG_PCA9698)		+= pca9698.o
-COBJS-$(CONFIG_S5P)		+= s5p_gpio.o
-COBJS-$(CONFIG_SANDBOX_GPIO)	+= sandbox.o
-COBJS-$(CONFIG_TEGRA2_GPIO)	+= tegra2_gpio.o
-COBJS-$(CONFIG_DA8XX_GPIO)	+= da8xx_gpio.o
-COBJS-$(CONFIG_ALTERA_PIO)	+= altera_pio.o
-COBJS-$(CONFIG_MPC83XX_GPIO)	+= mpc83xx_gpio.o
-COBJS-$(CONFIG_VYBRID_GPIO)	+= vybrid_gpio.o
+COBJS	= soc.o clock.o iomux.o
+SOBJS = lowlevel_init.o
 
-COBJS	:= $(COBJS-y)
-SRCS 	:= $(COBJS:.o=.c)
-OBJS 	:= $(addprefix $(obj),$(COBJS))
+SRCS	:= $(SOBJS:.o=.S) $(COBJS:.o=.c)
+OBJS	:= $(addprefix $(obj),$(SOBJS) $(COBJS))
 
-all:	$(LIB)
+all:	$(obj).depend $(LIB)
 
-$(LIB):	$(obj).depend $(OBJS)
+$(LIB):	$(OBJS)
 	$(call cmd_link_o_target, $(OBJS))
-
 
 #########################################################################
 
@@ -58,4 +46,4 @@ include $(SRCTREE)/rules.mk
 
 sinclude $(obj).depend
 
-########################################################################
+#########################################################################
