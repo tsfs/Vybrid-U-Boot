@@ -181,7 +181,7 @@ static u32 get_ipg_clk(void)
 
 	return freq / div;
 #else
-	return 0;
+	return 66000000;
 #endif
 }
 
@@ -299,8 +299,8 @@ u32 vybrid_get_fecclk(void)
 int do_vybrid_showclocks(cmd_tbl_t *cmdtp, int flag, int argc,
 			 char * const argv[])
 {
-	u32 freq;
 #if 0
+	u32 freq;
 	freq = decode_pll(vybridc_plls[PLL1_CLOCK], CONFIG_SYS_VYBRID_HCLK);
 	printf("PLL1       %8d MHz\n", freq / 1000000);
 	freq = decode_pll(vybridc_plls[PLL2_CLOCK], CONFIG_SYS_VYBRID_HCLK);

@@ -33,10 +33,14 @@
 #include <miiphy.h>
 
 #include <asm/fec.h>
+#ifdef CONFIG_COLDFIRE
 #include <asm/immap.h>
+#endif
+#ifdef CONFIG_VYBRID
+#endif
 
-#undef	ET_DEBUG
-#undef	MII_DEBUG
+#define	ET_DEBUG
+#define	MII_DEBUG
 
 /* Ethernet Transmit and Receive Buffers */
 #define DBUF_LENGTH		1520
@@ -116,7 +120,7 @@ void setFecDuplexSpeed(volatile fec_t * fecp, bd_t * bd, int dup_spd)
 	}
 
 	if ((dup_spd & 0xFFFF) == _100BASET) {
-#ifdef CONFIG_MCF5445x
+#if defined(CONFIG_MCF5445x) || defined(CONFIG_VYBRID)
 		fecp->rcr &= ~0x200;	/* disabled 10T base */
 #endif
 #ifdef MII_DEBUG
@@ -124,7 +128,7 @@ void setFecDuplexSpeed(volatile fec_t * fecp, bd_t * bd, int dup_spd)
 #endif
 		bd->bi_ethspeed = 100;
 	} else {
-#ifdef CONFIG_MCF5445x
+#if defined(CONFIG_MCF5445x) || defined(CONFIG_VYBRID)
 		fecp->rcr |= 0x200;	/* enabled 10T base */
 #endif
 #ifdef MII_DEBUG
@@ -154,6 +158,7 @@ int fec_send(struct eth_device *dev, volatile void *packet, int length)
 	}
 	if (j >= MCFFEC_TOUT_LOOP) {
 		printf("TX not ready\n");
+printf("eir %x\n", fecp->eir);
 	}
 
 	info->txbd[info->txIdx].cbd_bufaddr = (uint) packet;
@@ -182,7 +187,7 @@ int fec_send(struct eth_device *dev, volatile void *packet, int length)
 	j = 0;
 	while ((info->txbd[info->txIdx].cbd_sc & BD_ENET_TX_READY) &&
 	       (j < MCFFEC_TOUT_LOOP)) {
-		udelay(1);
+		udelay(10);
 		j++;
 	}
 	if (j >= MCFFEC_TOUT_LOOP) {
@@ -515,8 +520,8 @@ int fec_init(struct eth_device *dev, bd_t * bd)
 	fecp->etdsr = (unsigned int)(&info->txbd[0]);
 
 	/* Now enable the transmit and receive processing */
-	fecp->ecr |= FEC_ECR_ETHER_EN;
-
+	fecp->ecr |= FEC_ECR_ETHER_EN | 0x100;
+printf("ecr %x\n", fecp->ecr);
 	/* And last, try to fill Rx Buffer Descriptors */
 	fecp->rdar = 0x01000000;	/* Descriptor polling active    */
 
@@ -547,9 +552,11 @@ void fec_halt(struct eth_device *dev)
 	fecpin_setclear(dev, 0);
 
 	info->rxIdx = info->txIdx = 0;
+/*
 	memset(info->rxbd, 0, PKTBUFSRX * sizeof(cbd_t));
 	memset(info->txbd, 0, TX_BUF_CNT * sizeof(cbd_t));
 	memset(info->txbuf, 0, DBUF_LENGTH);
+*/
 }
 
 int mcffec_initialize(bd_t * bis)

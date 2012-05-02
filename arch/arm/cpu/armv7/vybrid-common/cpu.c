@@ -25,6 +25,7 @@
  */
 
 #include <common.h>
+#include <netdev.h>
 #include <asm/errno.h>
 #include <asm/io.h>
 #include <asm/arch/vybrid-regs.h>
@@ -83,9 +84,7 @@ int cpu_eth_init(bd_t *bis)
 {
 	int rc = -ENODEV;
 
-#if defined(CONFIG_FEC_VYBRID)
-	rc = fec_initialize(bis);
-#endif
+	rc = mcffec_initialize(bis);
 
 	return rc;
 }

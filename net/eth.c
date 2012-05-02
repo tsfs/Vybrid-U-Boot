@@ -255,7 +255,7 @@ int eth_initialize(bd_t *bis)
 	int num_devices = 0;
 	eth_devices = NULL;
 	eth_current = NULL;
-
+printf("%s\n", __FUNCTION__);
 	bootstage_mark(BOOTSTAGE_ID_NET_ETH_START);
 #if defined(CONFIG_MII) || defined(CONFIG_CMD_MII)
 	miiphy_init();

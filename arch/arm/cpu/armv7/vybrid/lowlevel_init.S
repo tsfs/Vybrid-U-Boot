@@ -24,6 +24,15 @@
 #include <asm/arch/vybrid-regs.h>
 #include <generated/asm-offsets.h>
 
+/* VFPU setup/invalidation/disable */
+.macro init_vfpu
+	ldr r0, =(0xF << 20)
+	mcr p15, 0, r0, c1, c0, 2
+	mov r3, #0x40000000
+	.long 0xeee83a10
+//	vmsr FPEXC, r3
+.endm /* init_vfpu */
+
 /* L2CC Cache setup/invalidation/disable */
 .macro init_l2cc
 	/* explicitly disable L2 cache */
@@ -82,6 +91,9 @@
 .macro init_clock
 	ldr r0, =CCM_BASE_ADDR
 
+	ldr r1, =CONFIG_SYS_CLKCTRL_CLPCR
+	str r1, [r0, #CLKCTL_CLPCR]
+
 	/* Gate of clocks to the peripherals first */
 	ldr r1, =CONFIG_SYS_CLKCTL_CCGR0
 	str r1, [r0, #CLKCTL_CCGR0]
@@ -107,6 +119,12 @@
 	str r1, [r0, #CLKCTL_CCGR10]
 	ldr r1, =CONFIG_SYS_CLKCTL_CCGR11
 	str r1, [r0, #CLKCTL_CCGR11]
+
+	ldr r2, =ANATOP_BASE_ADDR
+	ldr r1, =0x2001
+	str r1, [r2, #0x30]
+	ldr r1, =0x2001
+	str r1, [r2, #0x270]
 
 	ldr r1, =CONFIG_SYS_CLKCTRL_CCR
 	str r1, [r0, #CLKCTL_CCR]
@@ -134,13 +152,6 @@
 
 	ldr r1, =CONFIG_SYS_CLKCTRL_CSCDR4
 	str r1, [r0, #CLKCTL_CSCDR4]
-
-	ldr r0, =ANATOP_BASE_ADDR
-	ldr r1, =0x2001
-	str r1, [r0, #0x30]
-	ldr r1, =0x2001
-	str r1, [r0, #0x270]
-
 .endm
 
 .macro setup_wdog
@@ -166,6 +177,8 @@ lowlevel_init:
 	mrc 15, 0, r1, c1, c0, 1
 	orr r1, r1, #(1 << 5)    /* enable L1NEON bit */
 	mcr 15, 0, r1, c1, c0, 1
+
+//	init_vfpu
 
 //	init_l2cc
 

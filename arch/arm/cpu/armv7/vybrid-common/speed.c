@@ -27,15 +27,18 @@
 #include <common.h>
 #include <asm/arch/vybrid-regs.h>
 #include <asm/arch/clock.h>
+#include <asm/io.h>
 
 DECLARE_GLOBAL_DATA_PTR;
 
 int get_clocks(void)
 {
-	gd->bus_clk = 132000000;
+//	gd->bus_clk = 132000000;
+	gd->bus_clk = 66000000;
 	gd->ipg_clk = 66000000;
 #ifdef CONFIG_FSL_ESDHC
-	gd->sdhc_clk = mxc_get_clock(MXC_IPG_PERCLK);
+	//gd->sdhc_clk = mxc_get_clock(MXC_IPG_PERCLK);
+	gd->sdhc_clk = 132000000;
 #endif
 	return 0;
 }

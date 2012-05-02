@@ -33,24 +33,19 @@
 DECLARE_GLOBAL_DATA_PTR;
 
 #define timestamp (gd->tbl)
+#define timerticks (gd->tbu)
+#define lastinc	(gd->lastinc)
+static unsigned long ltmstamp = 0;
 
 #define CONFIG_TMR_USEPIT
 #ifdef CONFIG_TMR_USEPIT
-static long long lastinc = 0;
-static ulong timerticks = 0;
 
 unsigned long long _usec2ticks(unsigned long long usec);
-
-static inline unsigned long long tick_to_time(unsigned long long tick)
-{
-	tick /= timerticks;
-
-	return tick;
-}
 
 int timer_init(void)
 {
 	ulong usecs;
+	ulong ticks;
 
 	timestamp = 0;
 
@@ -58,32 +53,40 @@ int timer_init(void)
 	 * nsecs conversion = (1/ipg_clk) * 10^9
 	 * equivalent to 1000 / (ipg_clk / 10^6)
 	 */
-	usecs = (ulong)((float)(gd->ipg_clk / 1000000));
-	usecs = (ulong)((float)(1000 / usecs));
+	usecs = (gd->ipg_clk / 1000000);
+	ticks = 1000 / usecs;
 
 	clrbits_le32(PIT_MCR, 2);	/* enable PIT */
 
-	/* 1 us per ticks = 1000 ns / usecs = cycles time */
-	timerticks = (ulong)((float)(1000 / usecs));
+	/* ticks per 10 us = 10000 us / usecs = cycles time */
+	timerticks = (10 * 1000) / ticks;
 
 	__raw_writel(0xFFFFFFFF, PIT_LDVAL1);
 	__raw_writel(0, PIT_TCTRL1);
 	__raw_writel(4, PIT_TCTRL1);
 	__raw_writel(5, PIT_TCTRL1);
-	__raw_writel(0xFFFFFFFF, PIT_LDVAL0);
+	__raw_writel(timerticks, PIT_LDVAL0);
 	__raw_writel(1, PIT_TCTRL0);
+
+	lastinc = __raw_readl(PIT_LTMR64H);
 
 	return 0;
 }
 
-ulong get_timer_masked(void)
-{
-	return tick_to_time(get_ticks());
-}
-
 ulong get_timer(ulong base)
 {
-	return get_timer_masked() - base;
+	unsigned long now, diff;
+
+	now = __raw_readl(PIT_LTMR64H);
+	diff = -(now - lastinc);
+	ltmstamp += diff;
+	while (ltmstamp > 100) {
+		timestamp++;
+		ltmstamp -= 100;
+	}
+	lastinc = now;
+
+	return (timestamp - base);
 }
 
 /* delay x useconds AND preserve advance timstamp value */
@@ -95,6 +98,9 @@ void __udelay(unsigned long usec)
 	 * nsecs conversion = (1/ipg_clk) * 10^9
 	 * equivalent to 1000 / (ipg_clk / 10^6)
 	 */
+	if (usec < 5)
+		usec = 10;
+
 	nsecs = gd->ipg_clk / 1000000;
 	nsecs = 1000 / nsecs;
 
@@ -124,22 +130,12 @@ void __udelay(unsigned long usec)
  */
 unsigned long long _usec2ticks(unsigned long long usec)
 {
-	usec *= timerticks;
-
 	return usec;
 }
 
 unsigned long long get_ticks(void)
 {
-	long long now;
-
-	now = (__raw_readl(PIT_LTMR64H) << 32);
-	now |= __raw_readl(PIT_LTMR64L);
-
-	timestamp = (lastinc - now);
-	lastinc = now;
-
-	return timestamp;
+	return get_timer(0);
 }
 
 ulong get_tbclk(void)

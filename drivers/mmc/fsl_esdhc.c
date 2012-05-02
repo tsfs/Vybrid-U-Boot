@@ -173,7 +173,8 @@ esdhc_pio_read_write(struct mmc *mmc, struct mmc_data *data)
 }
 #endif
 
-static int esdhc_setup_data(struct mmc *mmc, struct mmc_data *data)
+//static int esdhc_setup_data(struct mmc *mmc, struct mmc_data *data)
+int esdhc_setup_data(struct mmc *mmc, struct mmc_data *data)
 {
 	int timeout;
 	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
@@ -254,7 +255,8 @@ static int esdhc_setup_data(struct mmc *mmc, struct mmc_data *data)
  * Sends a command out on the bus.  Takes the mmc pointer,
  * a command pointer, and an optional data pointer.
  */
-static int
+//static int
+int
 esdhc_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd, struct mmc_data *data)
 {
 	uint	xfertyp;
@@ -396,7 +398,8 @@ void set_sysctl(struct mmc *mmc, uint clock)
 	esdhc_setbits32(&regs->sysctl, clk);
 }
 
-static void esdhc_set_ios(struct mmc *mmc)
+//static void esdhc_set_ios(struct mmc *mmc)
+void esdhc_set_ios(struct mmc *mmc)
 {
 	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
 	struct fsl_esdhc *regs = (struct fsl_esdhc *)cfg->esdhc_base;
@@ -414,7 +417,8 @@ static void esdhc_set_ios(struct mmc *mmc)
 
 }
 
-static int esdhc_init(struct mmc *mmc)
+//static int esdhc_init(struct mmc *mmc)
+int esdhc_init(struct mmc *mmc)
 {
 	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
 	struct fsl_esdhc *regs = (struct fsl_esdhc *)cfg->esdhc_base;
@@ -428,8 +432,8 @@ static int esdhc_init(struct mmc *mmc)
 		udelay(1000);
 
 	/* Enable cache snooping */
-	if (cfg && !cfg->no_snoop)
-		esdhc_write32(&regs->scr, 0x00000040);
+//	if (cfg && !cfg->no_snoop)
+//		esdhc_write32(&regs->scr, 0x00000040);
 
 	esdhc_write32(&regs->sysctl, SYSCTL_HCKEN | SYSCTL_IPGEN);
 
@@ -448,7 +452,8 @@ static int esdhc_init(struct mmc *mmc)
 	return 0;
 }
 
-static int esdhc_getcd(struct mmc *mmc)
+//static int esdhc_getcd(struct mmc *mmc)
+int esdhc_getcd(struct mmc *mmc)
 {
 	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
 	struct fsl_esdhc *regs = (struct fsl_esdhc *)cfg->esdhc_base;
@@ -460,7 +465,8 @@ static int esdhc_getcd(struct mmc *mmc)
 	return timeout > 0;
 }
 
-static void esdhc_reset(struct fsl_esdhc *regs)
+//static void esdhc_reset(struct fsl_esdhc *regs)
+void esdhc_reset(struct fsl_esdhc *regs)
 {
 	unsigned long timeout = 100; /* wait max 100 ms */
 
