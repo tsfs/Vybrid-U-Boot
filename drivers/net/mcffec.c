@@ -39,8 +39,8 @@
 #ifdef CONFIG_VYBRID
 #endif
 
-#define	ET_DEBUG
-#define	MII_DEBUG
+#undef	ET_DEBUG
+#undef	MII_DEBUG
 
 /* Ethernet Transmit and Receive Buffers */
 #define DBUF_LENGTH		1520
@@ -158,7 +158,6 @@ int fec_send(struct eth_device *dev, volatile void *packet, int length)
 	}
 	if (j >= MCFFEC_TOUT_LOOP) {
 		printf("TX not ready\n");
-printf("eir %x\n", fecp->eir);
 	}
 
 	info->txbd[info->txIdx].cbd_bufaddr = (uint) packet;
@@ -521,7 +520,7 @@ int fec_init(struct eth_device *dev, bd_t * bd)
 
 	/* Now enable the transmit and receive processing */
 	fecp->ecr |= FEC_ECR_ETHER_EN | 0x100;
-printf("ecr %x\n", fecp->ecr);
+
 	/* And last, try to fill Rx Buffer Descriptors */
 	fecp->rdar = 0x01000000;	/* Descriptor polling active    */
 
@@ -552,11 +551,10 @@ void fec_halt(struct eth_device *dev)
 	fecpin_setclear(dev, 0);
 
 	info->rxIdx = info->txIdx = 0;
-/*
+
 	memset(info->rxbd, 0, PKTBUFSRX * sizeof(cbd_t));
 	memset(info->txbd, 0, TX_BUF_CNT * sizeof(cbd_t));
 	memset(info->txbuf, 0, DBUF_LENGTH);
-*/
 }
 
 int mcffec_initialize(bd_t * bis)

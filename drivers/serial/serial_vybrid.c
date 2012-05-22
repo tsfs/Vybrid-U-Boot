@@ -104,6 +104,7 @@ int serial_init (void)
 	clrbits_8((UART_CONSOLE + UC2), UC2_RE);
 	clrbits_8((UART_CONSOLE + UC2), UC2_TE);
 
+	out_8((UART_CONSOLE + UMODEM), 0);
 	out_8((UART_CONSOLE + UC1), 0);
 
 	// provide data bits, parity, stop bit, etc
