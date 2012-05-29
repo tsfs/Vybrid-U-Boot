@@ -301,6 +301,49 @@ struct weim {
 	u32	ear;
 };
 
+struct anadig {
+	u32	usb1_pll_ctrl;
+	u32	usb2_pll_ctrl;
+	u32	pll_528_ctrl;
+	u32	pll_528_ss;
+	u32	pll_528_num;
+	u32	pll_528_denom;
+	u32	pll_aud_ctrl;
+	u32	pll_aud_num;
+	u32	pll_aud_denom;
+	u32	pll_vid_ctrl;
+	u32	pll_vid_num;
+	u32	pll_vid_denom;
+	u32	pll_enet_ctrl;
+	u32	pll_pfd_480_usb1;
+	u32	pll_pfd_528;
+	u32	reg_1p1;
+	u32	reg_3p0;
+	u32	reg_2p5;
+	u32	ana_misc0;
+	u32	ana_misc1;
+	u32	tempsens0;
+	u32	usb1_vbus_det;
+	u32	usb1_vbus_chrg_det;
+	u32	usb1_vbus_detsta;
+	u32	usb1_chrg_detsta;
+	u32	usb1_loopback;
+	u32	usb1_misc;
+	u32	usb2_vbus_det;
+	u32	usb2_vbus_chrg_det;
+	u32	usb2_vbus_detsta;
+	u32	usb2_chrg_detsta;
+	u32	usb2_loopback;
+	u32	usb2_misc;
+	u32	digprog;
+	u32	pll_sys_ctrl;
+	u32	pll_sys_ss;
+	u32	pll_sys_num;
+	u32	pll_sys_denom;
+	u32	pfd_528_sys;
+	u32	pll_lock;
+};
+
 struct iomuxc {
 	u32	gpr0;
 	u32	gpr1;
@@ -327,10 +370,46 @@ struct fuse_bank1_regs {
 	u32	fuse15_31[0x11];
 };
 
-#define ANADIG_USB1_PLL_CTRL	(ANATOP_BASE_ADDR + 0x00)
-#define ANADIG_USB2_PLL_CTRL	(ANATOP_BASE_ADDR + 0x04)
-#define ANADIG_PLL_528_CTRL	(ANATOP_BASE_ADDR + 0x08)
-#define ANADIG_PLL_528_SS	(ANATOP_BASE_ADDR + 0x0C)
+#define ANADIG_USB1_PLL_CTRL	(0x10)
+#define ANADIG_USB2_PLL_CTRL	(0x20)
+#define ANADIG_PLL_528_CTRL	(0x30)
+#define ANADIG_PLL_528_SS	(0x40)
+#define ANADIG_PLL_528_NUM	(0x50)
+#define ANADIG_PLL_528_DENOM	(0x60)
+#define ANADIG_PLL_AUD_CTRL	(0x70)
+#define ANADIG_PLL_AUD_NUM	(0x80)
+#define ANADIG_PLL_AUD_DENOM	(0x90)
+#define ANADIG_PLL_VID_CTRL	(0xA0)
+#define ANADIG_PLL_VID_NUM	(0xB0)
+#define ANADIG_PLL_VID_DENOM	(0xC0)
+#define ANADIG_PLL_ENET_CTRL	(0xE0)
+#define ANADIG_PLL_PFD_480_USB1	(0xF0)
+#define ANADIG_PLL_PFD_528	(0x100)
+#define ANADIG_REG_1P1		(0x110)
+#define ANADIG_REG_3P0		(0x120)
+#define ANADIG_REG_2P5		(0x130)
+#define ANADIG_ANA_MISC0	(0x150)
+#define ANADIG_ANA_MISC1	(0x160)
+#define ANADIG_TEMPSENS0	(0x180)
+#define ANADIG_USB1_VBUS_DET	(0x1A0)
+#define ANADIG_USB1_CHRG_DET	(0x1B0)
+#define ANADIG_USB1_VBUS_DETSTA	(0x1C0)
+#define ANADIG_UAB1_CHRG_DETSTA	(0x1D0)
+#define ANADIG_USB1_LOOPBACK	(0x1E0)
+#define ANADIG_USB1_MISC	(0x1F0)
+#define ANADIG_USB2_VBUS_DET	(0x200)
+#define ANADIG_USB2_CHRG_DET	(0x210)
+#define ANADIG_USB2_VBUS_DETSTA	(0x220)
+#define ANADIG_USB2_CHRG_DETSTA	(0x230)
+#define ANADIG_USB2_LOOPBACK	(0x240)
+#define ANADIG_USB2_MISC	(0x250)
+#define ANADIG_DIGPROG		(0x260)
+#define ANADIG_PLL_SYS_CTRL	(0x270)
+#define ANADIG_PLL_SYS_SS	(0x280)
+#define ANADIG_PLL_SYS_NUM	(0x290)
+#define ANADIG_PLL_SYS_DENOM	(0x2A0)
+#define ANADIG_PFD_528_SYS	(0x2B0)
+#define ANADIG_PLL_LOCK		(0x2C0)
 
 #define DDR_CR_BASE		DDR_BASE_ADDR
 #define DDR_PHY_BASE		(DDR_BASE_ADDR + 0x400)

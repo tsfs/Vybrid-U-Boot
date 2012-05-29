@@ -158,7 +158,7 @@ unsigned long ddr_ctrl_init(void)
 	__raw_writel(0x006DB00C, DDR_CR017);	/* tras_max, tmod */
 	__raw_writel(0x00000403, DDR_CR018);	/* tckesr, tcke */
 
-	__raw_writel(0x01000403, DDR_CR020);	/* ap, writrp, tckesr, tcke */
+	__raw_writel(0x01000000, DDR_CR020);	/* ap, writrp */
 	__raw_writel(0x06060101, DDR_CR021);	/* trcd_int, tras_lockout
 						   ccAP */
 	__raw_writel(0x000B0000, DDR_CR022);	/* tdal */
@@ -305,13 +305,12 @@ unsigned long ddr_ctrl_init(void)
 
 int dram_init(void)
 {
-	/* dram_init must store complete ramsize in gd->ram_size */
-
-//	gd->ram_size = ddr_ctrl_init();
-	ddr_ctrl_init();
-
-	// when using iram...
+#ifdef CONFIG_SYS_UBOOT_IN_GPURAM
 	gd->ram_size = 0x80000;
+	ddr_ctrl_init();
+#else
+	gd->ram_size = ddr_ctrl_init();
+#endif
 	return 0;
 }
 

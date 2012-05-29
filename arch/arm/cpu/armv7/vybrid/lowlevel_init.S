@@ -121,10 +121,13 @@
 	str r1, [r0, #CLKCTL_CCGR11]
 
 	ldr r2, =ANATOP_BASE_ADDR
-	ldr r1, =0x2001
+	ldr r1, =CONFIG_SYS_ANADIG_528_CTRL
 	str r1, [r2, #0x30]
-	ldr r1, =0x2001
+	ldr r1, =CONFIG_SYS_ANADIG_ENET_CTRL
+	str r1, [r2, #0xE0]
+	ldr r1, =CONFIG_SYS_ANADIG_SYS_CTRL
 	str r1, [r2, #0x270]
+	/* check for lock */
 
 	ldr r1, =CONFIG_SYS_CLKCTRL_CCR
 	str r1, [r0, #CLKCTL_CCR]
