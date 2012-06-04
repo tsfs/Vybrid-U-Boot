@@ -48,7 +48,7 @@ struct fsl_esdhc_cfg esdhc_cfg[2] = {
 };
 #endif
 
-void ddr_iomuxc(void)
+void setup_iomux_ddr(void)
 {
 #define DDR_IOMUX	0x000001C0
 #define DDR_IOMUX1	0x000101C0
@@ -322,6 +322,7 @@ unsigned long ddr_ctrl_init(void)
 
 int dram_init(void)
 {
+	setup_iomux_ddr();
 #ifdef CONFIG_SYS_UBOOT_IN_GPURAM
 	gd->ram_size = 0x80000;
 	ddr_ctrl_init();
@@ -336,11 +337,6 @@ void setup_iomux_uart(void)
 	// UART0
 	__raw_writel(0x001021a3, IOMUXC_PAD_032);
 	__raw_writel(0x001021a1, IOMUXC_PAD_033);
-}
-
-void setup_iomux_ddr(void)
-{
-	__raw_writel(0x000100a0, IOMUXC_DDR_CLK);
 }
 
 #if defined(CONFIG_CMD_NET)
@@ -441,6 +437,10 @@ int board_mmc_init(bd_t *bis)
 
 int board_early_init_f(void)
 {
+#if defined(CONFIG_CMD_NET)
+	/* Bring the Ethernet PHY out of reset */
+	__raw_writel(0x00000004, 0x400ff040);
+#endif
 	setup_iomux_uart();
 
 	return 0;
@@ -449,7 +449,7 @@ int board_early_init_f(void)
 int board_init(void)
 {
 	/* address of boot parameters */
-	gd->bd->bi_boot_params = PHYS_SDRAM_1 + 0x100;
+	gd->bd->bi_boot_params = CONFIG_SYS_SDRAM_BASE + 0x100;
 
 	return 0;
 }

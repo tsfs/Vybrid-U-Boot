@@ -26,9 +26,7 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
-//#define DEBUG
-
- /* High Level Configuration Options */
+/* High Level Configuration Options */
 
 #define CONFIG_VYBRID
 
@@ -54,7 +52,7 @@
 
 #undef CONFIG_OF_LIBFDT
 
-#define CONFIG_MACH_TYPE		MACH_TYPE_MX51_BABBAGE
+#define CONFIG_MACH_TYPE		MACH_TYPE_VYBRID_VF6XX
 /* Size of malloc() pool */
 #define CONFIG_SYS_MALLOC_LEN		(16 << 10)
 
@@ -62,7 +60,7 @@
 
 /* Hardware drivers */
 #define CONFIG_VYBRID_UART
-#define CONFIG_VYBRID_UART_BASE		UART0_BASE
+#define CONFIG_VYBRID_UART_BASE		UART1_BASE
 #define CONFIG_VYBRID_GPIO
 
 /* allow to overwrite serial and ethaddr */
@@ -85,6 +83,7 @@
 #undef CONFIG_CMD_NFS		/* NFS support			*/
 #define CONFIG_CMD_PING
 
+#undef CONFIG_CMD_DATE
 #undef CONFIG_CMD_IMI		/* iminfo */
 #undef CONFIG_CMD_IMLS
 #undef CONFIG_CMD_LOADB		/* loadb */
@@ -109,6 +108,8 @@
 #define CONFIG_CMD_FAT
 #define CONFIG_DOS_PARTITION
 #endif
+
+#define CONFIG_QUAD_SPI
 
 /* Network configuration */
 #define CONFIG_MCFFEC
@@ -154,12 +155,10 @@
 #	endif			/* CONFIG_SYS_DISCOVER_PHY */
 #endif
 
-#undef CONFIG_CMD_DATE
-
-#define CONFIG_BOOTDELAY	3
-#define CONFIG_ETHPRIME		"FEC0"
-#define CONFIG_LOADADDR		0x3f400000	/* loadaddr env var */
-#define CONFIG_ARP_TIMEOUT	200UL
+#define CONFIG_BOOTDELAY		3
+#define CONFIG_ETHPRIME			"FEC0"
+#define CONFIG_LOADADDR			0x3f400000	/* loadaddr env var */
+#define CONFIG_ARP_TIMEOUT		200UL
 
 /* Miscellaneous configurable options */
 #define CONFIG_SYS_LONGHELP		/* undef to save memory */
@@ -186,12 +185,11 @@
  *
  * The stack sizes are set up in start.S using the settings below
  */
-#define CONFIG_STACKSIZE	(128 * 1024)	/* regular stack */
+#define CONFIG_STACKSIZE		(128 * 1024)	/* regular stack */
 
 /* Physical Memory Map */
-#define CONFIG_NR_DRAM_BANKS	1
-#define PHYS_SDRAM_1		CSD0_BASE_ADDR
-#define PHYS_SDRAM_1_SIZE	(512 * 1024 * 1024)
+#define CONFIG_NR_DRAM_BANKS		1
+#define PHYS_SDRAM_1_SIZE		(512 * 1024 * 1024)
 
 //#define CONFIG_SYS_SDRAM_BASE		(PHYS_SDRAM_1)
 //#define CONFIG_SYS_SDRAM_BASE		(CONFIG_SYS_INIT_RAM_ADDR)
@@ -227,10 +225,10 @@
 #define CONFIG_SYS_CLKCTRL_CCR		0x00010005
 #define CONFIG_SYS_CLKCTRL_CCSR		0x0003FF24
 #define CONFIG_SYS_CLKCTRL_CACRR	0x00000810
-#define CONFIG_SYS_CLKCTRL_CSCMR1	0x000a0000
+#define CONFIG_SYS_CLKCTRL_CSCMR1	0x03CA0000
 #define CONFIG_SYS_CLKCTRL_CSCDR1	0x01000000
 #define CONFIG_SYS_CLKCTRL_CSCDR2	0x30110000
-#define CONFIG_SYS_CLKCTRL_CSCDR3	0x00000000
+#define CONFIG_SYS_CLKCTRL_CSCDR3	0x00001F1F
 #define CONFIG_SYS_CLKCTRL_CSCMR2	0x00000030
 #define CONFIG_SYS_CLKCTRL_CSCDR4	0x00000000
 #define CONFIG_SYS_CLKCTRL_CLPCR	0x00000078
@@ -261,10 +259,10 @@
 /* FLASH and environment organization */
 #define CONFIG_SYS_NO_FLASH
 
-#define CONFIG_ENV_OFFSET      (6 * 64 * 1024)
-#define CONFIG_ENV_SIZE        (8 * 1024)
+#define CONFIG_ENV_OFFSET		(6 * 64 * 1024)
+#define CONFIG_ENV_SIZE			(8 * 1024)
 #undef CONFIG_ENV_IS_IN_MMC
 #define CONFIG_ENV_IS_NOWHERE
-#define CONFIG_SYS_MMC_ENV_DEV 0
+#define CONFIG_SYS_MMC_ENV_DEV		0
 
 #endif

@@ -48,7 +48,7 @@ struct fsl_esdhc_cfg esdhc_cfg[2] = {
 };
 #endif
 
-void ddr_iomuxc(void)
+void setup_iomux_ddr(void)
 {
 #define DDR_IOMUX	0x00000180
 #define DDR_IOMUX1	0x00010180
@@ -305,6 +305,7 @@ unsigned long ddr_ctrl_init(void)
 
 int dram_init(void)
 {
+	setup_iomux_ddr();
 #ifdef CONFIG_SYS_UBOOT_IN_GPURAM
 	gd->ram_size = 0x80000;
 	ddr_ctrl_init();
@@ -322,11 +323,6 @@ void setup_iomux_uart(void)
 	__raw_writel(0x002011a1, IOMUXC_PAD_029);
 	__raw_writel(0x001011a2, IOMUXC_PAD_032);
 	__raw_writel(0x001011a1, IOMUXC_PAD_033);
-}
-
-void setup_iomux_ddr(void)
-{
-	__raw_writel(0x000100a0, IOMUXC_DDR_CLK);
 }
 
 #if defined(CONFIG_CMD_NET)
@@ -391,6 +387,25 @@ int fecpin_setclear(struct eth_device *dev, int setclear)
 #ifdef CONFIG_MXC_SPI
 void setup_iomux_spi(void)
 {
+}
+#endif
+
+#ifdef CONFIG_QUAD_SPI
+void setup_iomux_quadspi(void)
+{
+	__raw_writel(0x001030C3, IOMUXC_PAD_079);	/* SCK */
+	__raw_writel(0x001030FF, IOMUXC_PAD_080);	/* CS0 */
+	__raw_writel(0x001030C3, IOMUXC_PAD_081);	/* D3 */
+	__raw_writel(0x001030C3, IOMUXC_PAD_082);	/* D2 */
+	__raw_writel(0x001030C3, IOMUXC_PAD_083);	/* D1 */
+	__raw_writel(0x001030C3, IOMUXC_PAD_084);	/* D0 */
+
+	__raw_writel(0x001030C3, IOMUXC_PAD_086);	/* SCK */
+	__raw_writel(0x001030FF, IOMUXC_PAD_087);	/* CS0 */
+	__raw_writel(0x001030C3, IOMUXC_PAD_088);	/* D3 */
+	__raw_writel(0x001030C3, IOMUXC_PAD_089);	/* D2 */
+	__raw_writel(0x001030C3, IOMUXC_PAD_090);	/* D1 */
+	__raw_writel(0x001030C3, IOMUXC_PAD_091);	/* D0 */
 }
 #endif
 
@@ -470,7 +485,7 @@ int board_early_init_f(void)
 int board_init(void)
 {
 	/* address of boot parameters */
-	gd->bd->bi_boot_params = PHYS_SDRAM_1 + 0x100;
+	gd->bd->bi_boot_params = CONFIG_SYS_SDRAM_BASE + 0x100;
 
 	return 0;
 }

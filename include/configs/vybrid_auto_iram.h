@@ -54,7 +54,7 @@
 
 #undef CONFIG_OF_LIBFDT
 
-#define CONFIG_MACH_TYPE		MACH_TYPE_MX51_BABBAGE
+#define CONFIG_MACH_TYPE		MACH_TYPE_VYBRID_VF6XX
 /* Size of malloc() pool */
 #define CONFIG_SYS_MALLOC_LEN		(16 << 10)
 
