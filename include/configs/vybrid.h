@@ -59,7 +59,7 @@
 
 /* Hardware drivers */
 #define CONFIG_VYBRID_UART
-#define CONFIG_VYBRID_UART_BASE		UART1_BASE
+#define CONFIG_VYBRID_UART_BASE		UART0_BASE
 #define CONFIG_VYBRID_GPIO
 
 /* allow to overwrite serial and ethaddr */
@@ -154,10 +154,10 @@
 #	endif			/* CONFIG_SYS_DISCOVER_PHY */
 #endif
 
-#define CONFIG_BOOTDELAY	3
-#define CONFIG_ETHPRIME		"FEC0"
-#define CONFIG_LOADADDR		0x80010000	/* loadaddr env var */
-#define CONFIG_ARP_TIMEOUT	200UL
+#define CONFIG_BOOTDELAY		3
+#define CONFIG_ETHPRIME			"FEC0"
+#define CONFIG_LOADADDR			0x80010000	/* loadaddr env var */
+#define CONFIG_ARP_TIMEOUT		200UL
 
 /* Miscellaneous configurable options */
 #define CONFIG_SYS_LONGHELP		/* undef to save memory */
@@ -172,12 +172,14 @@
 #define CONFIG_SYS_BARGSIZE 		CONFIG_SYS_CBSIZE /* Boot Argument Buffer Size */
 
 #define CONFIG_SYS_MEMTEST_START	0x80010000
-#define CONFIG_SYS_MEMTEST_END		0x8F000000
+#define CONFIG_SYS_MEMTEST_END		0x87C00000
 
 #define CONFIG_SYS_LOAD_ADDR		CONFIG_LOADADDR
 
 #define CONFIG_SYS_HZ			1000
 #undef CONFIG_CMDLINE_EDITING
+
+#define CONFIG_PRAM			2048
 
 /*
  * Stack sizes

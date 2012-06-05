@@ -204,7 +204,6 @@ unsigned long ddr_ctrl_init(void)
 	__raw_writel(0x00000000, DDR_CR057);	/* ctrl_raw */
 
 	/* ECC */
-	//__raw_writel(0x00000000, DDR_CR058);
 
 	/* ZQ stuff */
 	__raw_writel(0x01000200, DDR_CR066);	/* zqcl, zqinit */
@@ -273,7 +272,6 @@ unsigned long ddr_ctrl_init(void)
 	__raw_writel(0x00000B00, DDR_CR126);	/* PHY rdlat */
 	__raw_writel(0x00000000, DDR_CR127);	/* dram ck dis */
 
-//	__raw_writel(0x00000000, DDR_CR131);
 	__raw_writel(0x00003cc8, DDR_CR131);
 	__raw_writel(0x00000506, DDR_CR132);	/* wrlat, rdlat */
 	__raw_writel(0x00020000, DDR_CR137);
@@ -296,7 +294,6 @@ unsigned long ddr_ctrl_init(void)
 	__raw_writel(0x00000000, DDR_CR152);
 	__raw_writel(0x00000000, DDR_CR153);
 
-//	__raw_writel(0x68200000, DDR_CR154);
 	__raw_writel(0x00000000, DDR_CR154);
 	__raw_writel(0x00000202, DDR_CR155);	/* pad_ibe, _sel */
 	__raw_writel(0x00000006, DDR_CR158);	/* twr */
@@ -317,6 +314,7 @@ unsigned long ddr_ctrl_init(void)
 
 	dram_size = (1 << (rows + cols)) * banks * port;
 	printf("dram_size %x\n", dram_size);
+
 	return dram_size;
 }
 

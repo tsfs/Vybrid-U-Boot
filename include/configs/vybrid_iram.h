@@ -53,6 +53,7 @@
 #undef CONFIG_OF_LIBFDT
 
 #define CONFIG_MACH_TYPE		MACH_TYPE_VYBRID_VF6XX
+
 /* Size of malloc() pool */
 #define CONFIG_SYS_MALLOC_LEN		(16 << 10)
 
@@ -60,7 +61,7 @@
 
 /* Hardware drivers */
 #define CONFIG_VYBRID_UART
-#define CONFIG_VYBRID_UART_BASE		UART1_BASE
+#define CONFIG_VYBRID_UART_BASE		UART0_BASE
 #define CONFIG_VYBRID_GPIO
 
 /* allow to overwrite serial and ethaddr */

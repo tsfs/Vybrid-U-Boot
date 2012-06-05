@@ -422,8 +422,12 @@ void board_init_f(ulong bootflag)
 	gd->relocaddr = addr;
 	gd->start_addr_sp = addr_sp;
 	gd->reloc_off = addr - _TEXT_BASE;
-gd->reloc_off += _TEXT_BASE;
-	printf("relocation Offset is: %08lx\n", gd->reloc_off);
+
+#ifdef CONFIG_SYS_UBOOT_IN_GPURAM
+	gd->reloc_off += _TEXT_BASE;
+#endif
+
+	debug("relocation Offset is: %08lx\n", gd->reloc_off);
 	memcpy(id, (void *)gd, sizeof(gd_t));
 
 	relocate_code(addr_sp, id, addr);

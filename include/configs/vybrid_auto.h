@@ -26,8 +26,6 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
-//#define DEBUG
-
  /* High Level Configuration Options */
 
 #define CONFIG_VYBRID
@@ -40,9 +38,8 @@
 #define CONFIG_SYS_ICACHE_OFF
 #define CONFIG_SYS_CACHELINE_SIZE	64
 
-#define CONFIG_SYS_UBOOT_IN_GPURAM
-
 #include <asm/arch/vybrid-regs.h>
+
 /*
  * Disabled for now due to build problems under Debian and a significant
  * increase in the final file size: 144260 vs. 109536 Bytes.
@@ -56,7 +53,7 @@
 
 #define CONFIG_MACH_TYPE		MACH_TYPE_VYBRID_VF6XX
 /* Size of malloc() pool */
-#define CONFIG_SYS_MALLOC_LEN		(16 << 10)
+#define CONFIG_SYS_MALLOC_LEN		(CONFIG_ENV_SIZE + 2 * 1024 * 1024)
 
 #define CONFIG_BOARD_LATE_INIT
 
@@ -75,8 +72,8 @@
 #include <config_cmd_default.h>
 
 #define CONFIG_CMD_BDI		/* bdinfo */
-#undef CONFIG_CMD_BOOTD
-#undef CONFIG_CMD_BOOTM
+#define CONFIG_CMD_BOOTD
+#define CONFIG_CMD_DHCP
 #define CONFIG_CMD_CONSOLE	/* coninfo */
 #define CONFIG_CMD_MEMORY	/* md mm nm mw cp cmp crc base loop mtest */
 #define CONFIG_CMD_MISC
@@ -85,6 +82,7 @@
 #undef CONFIG_CMD_NFS		/* NFS support			*/
 #define CONFIG_CMD_PING
 
+#undef CONFIG_CMD_DATE
 #undef CONFIG_CMD_IMI		/* iminfo */
 #undef CONFIG_CMD_IMLS
 #undef CONFIG_CMD_LOADB		/* loadb */
@@ -92,9 +90,11 @@
 
 #define CONFIG_MMC
 #ifdef CONFIG_MMC
+#define CONFIG_SYS_ESDHC1_BASE		ESDHC2_BASE_ADDR
+#define CONFIG_SYS_ESDHC2_BASE		ESDHC2_BASE_ADDR
 #define CONFIG_FSL_ESDHC
 #define CONFIG_SYS_FSL_ESDHC_ADDR	0
-#define CONFIG_SYS_FSL_ESDHC_NUM	2
+#define CONFIG_SYS_FSL_ESDHC_NUM	1
 //#define CONFIG_MMC_TRACE
 
 //#define CONFIG_ESDHC_DETECT_USE_EXTERN_IRQ1
@@ -108,6 +108,8 @@
 #define CONFIG_DOS_PARTITION
 #endif
 
+#undef CONFIG_QUAD_SPI
+
 /* Network configuration */
 #define CONFIG_MCFFEC
 #ifdef CONFIG_MCFFEC
@@ -120,11 +122,14 @@
 #	define CONFIG_SYS_FEC0_PINMUX	0
 #	define CONFIG_SYS_FEC1_PINMUX	0
 #	define CONFIG_SYS_FEC0_IOBASE	MACNET0_BASE_ADDR
+#	define CONFIG_SYS_FEC1_IOBASE	MACNET1_BASE_ADDR
 #	define CONFIG_SYS_FEC0_MIIBASE	MACNET0_BASE_ADDR
+#	define CONFIG_SYS_FEC1_MIIBASE	MACNET0_BASE_ADDR
 #	define MCFFEC_TOUT_LOOP 50000
 #	undef CONFIG_HAS_ETH1
 
 #	define CONFIG_ETHADDR		00:e0:0c:bc:e5:60
+#	define CONFIG_ETH1ADDR		00:e0:0c:bc:e5:61
 #	define CONFIG_ETHPRIME		"FEC0"
 #	define CONFIG_IPADDR		10.81.67.175
 #	define CONFIG_NETMASK		255.255.252.0
@@ -149,11 +154,9 @@
 #	endif			/* CONFIG_SYS_DISCOVER_PHY */
 #endif
 
-#undef CONFIG_CMD_DATE
-
 #define CONFIG_BOOTDELAY		3
 #define CONFIG_ETHPRIME			"FEC0"
-#define CONFIG_LOADADDR			0x3f400000	/* loadaddr env var */
+#define CONFIG_LOADADDR			0x80010000	/* loadaddr env var */
 #define CONFIG_ARP_TIMEOUT		200UL
 
 /* Miscellaneous configurable options */
@@ -166,19 +169,20 @@
 /* Print Buffer Size */
 #define CONFIG_SYS_PBSIZE 		(CONFIG_SYS_CBSIZE + sizeof(CONFIG_SYS_PROMPT) + 16)
 #define CONFIG_SYS_MAXARGS		16	/* max number of command args */
-#define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE /* Boot Argument Buffer Size */
+#define CONFIG_SYS_BARGSIZE 		CONFIG_SYS_CBSIZE /* Boot Argument Buffer Size */
 
-#define CONFIG_SYS_MEMTEST_START	0x3f400000
-#define CONFIG_SYS_MEMTEST_END		0x10000
+#define CONFIG_SYS_MEMTEST_START	0x80010000
+#define CONFIG_SYS_MEMTEST_END		0x84C00000
 
 #define CONFIG_SYS_LOAD_ADDR		CONFIG_LOADADDR
 
 #define CONFIG_SYS_HZ			1000
 #undef CONFIG_CMDLINE_EDITING
 
+#define CONFIG_PRAM			2048
+
 /*
  * Stack sizes
- *
  * The stack sizes are set up in start.S using the settings below
  */
 #define CONFIG_STACKSIZE		(128 * 1024)	/* regular stack */
@@ -187,7 +191,7 @@
 #define CONFIG_NR_DRAM_BANKS		1
 #define PHYS_SDRAM_1_SIZE		(64 * 1024 * 1024)
 
-#define CONFIG_SYS_SDRAM_BASE		(0x3f400000)
+#define CONFIG_SYS_SDRAM_BASE		(0x80000000)
 #define CONFIG_SYS_INIT_RAM_ADDR	(IRAM_BASE_ADDR)
 #define CONFIG_SYS_INIT_RAM_SIZE	(IRAM_SIZE)
 
