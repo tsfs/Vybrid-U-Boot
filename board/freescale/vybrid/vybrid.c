@@ -502,7 +502,7 @@ int board_late_init(void)
 
 int checkboard(void)
 {
-	puts("Board: VyBrid\n");
+	puts("Board: Vybrid\n");
 
 	return 0;
 }

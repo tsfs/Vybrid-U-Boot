@@ -28,7 +28,6 @@
 #include <asm/io.h>
 #include <asm/errno.h>
 #include <asm/arch/vybrid-regs.h>
-#include <asm/arch/crm_regs.h>
 #include <asm/arch/clock.h>
 #include <div64.h>
 
@@ -49,6 +48,8 @@ struct mxc_pll_reg *vybridc_plls[PLL_CLOCKS] = {
 	[PLL3_CLOCK] = (struct mxc_pll_reg *)PLL3_BASE_ADDR,
 */
 };
+
+struct clkctl *ccm = (struct clkctl *)CCM_BASE_ADDR;
 
 /* Calculate the frequency of PLLn. */
 static uint32_t decode_pll(struct mxc_pll_reg *pll, uint32_t infreq)
@@ -109,16 +110,11 @@ static uint32_t decode_pll(struct mxc_pll_reg *pll, uint32_t infreq)
 /* Get mcu main rate */
 u32 get_mcu_main_clk(void)
 {
-#if 0
 	u32 reg, freq;
 
-	reg = (__raw_readl(&mxc_ccm->cacrr) & MXC_CCM_CACRR_ARM_PODF_MASK) >>
-		MXC_CCM_CACRR_ARM_PODF_OFFSET;
+	reg = __raw_readl(&ccm->cacrr) & 7;
 	freq = decode_pll(vybridc_plls[PLL1_CLOCK], CONFIG_SYS_VYBRID_HCLK);
 	return freq / (reg + 1);
-#else
-	return 0;
-#endif
 }
 
 /* Get the rate of peripheral's root clock. */

@@ -24,24 +24,4 @@
 #ifndef __ARCH_ARM_MACH_VYBRID_CRM_REGS_H__
 #define __ARCH_ARM_MACH_VYBRID_CRM_REGS_H__
 
-/* DPLL register mapping structure */
-struct mxc_pll_reg {
-	u32 ctrl;
-	u32 config;
-	u32 op;
-	u32 mfd;
-	u32 mfn;
-	u32 mfn_minus;
-	u32 mfn_plus;
-	u32 hfs_op;
-	u32 hfs_mfd;
-	u32 hfs_mfn;
-	u32 mfn_togc;
-	u32 destat;
-};
-
-/* Register maping of CCM*/
-struct mxc_ccm_reg {
-};
-
 #endif				/* __ARCH_ARM_MACH_VYBRID_CRM_REGS_H__ */

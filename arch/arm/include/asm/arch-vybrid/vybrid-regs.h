@@ -25,29 +25,12 @@
 #define __ASM_ARCH_VYBRID_REGS_H__
 
 #define IRAM_BASE_ADDR		0x3F000000	/* internal ram */
-#define AIPS0_BASE_ADDR         0x40000000
-#define AIPS1_BASE_ADDR         0x40080000
-#define CSD0_BASE_ADDR          0x80000000	// ddr 0
-#define CSD1_BASE_ADDR          0xa0000000	// ddr 1
+#define AIPS0_BASE_ADDR		0x40000000
+#define AIPS1_BASE_ADDR		0x40080000
+#define CSD0_BASE_ADDR		0x80000000	// ddr 0
+#define CSD1_BASE_ADDR		0xa0000000	// ddr 1
 
 #define IRAM_SIZE		0x00040000	/* 256 KB */
-/*
-#define NFC_BASE_ADDR_AXI       0xCFFF0000	//
-*/
-/* SPBA global module enabled #0 */
-/*
-#define MMC_SDHC1_BASE_ADDR	(SPBA0_BASE_ADDR + 0x00004000)
-#define MMC_SDHC2_BASE_ADDR	(SPBA0_BASE_ADDR + 0x00008000)
-#define CSPI1_BASE_ADDR 	(SPBA0_BASE_ADDR + 0x00010000)
-#define SSI2_BASE_ADDR		(SPBA0_BASE_ADDR + 0x00014000)
-#define MMC_SDHC3_BASE_ADDR	(SPBA0_BASE_ADDR + 0x00020000)
-#define MMC_SDHC4_BASE_ADDR	(SPBA0_BASE_ADDR + 0x00024000)
-#define SPDIF_BASE_ADDR		(SPBA0_BASE_ADDR + 0x00028000)
-#define ATA_DMA_BASE_ADDR	(SPBA0_BASE_ADDR + 0x00030000)
-#define SLIM_DMA_BASE_ADDR	(SPBA0_BASE_ADDR + 0x00034000)
-#define HSI2C_DMA_BASE_ADDR	(SPBA0_BASE_ADDR + 0x00038000)
-#define SPBA_CTRL_BASE_ADDR	(SPBA0_BASE_ADDR + 0x0003C000)
-*/
 
 /* AIPS 0 */
 #define MSCM_BASE_ADDR		(AIPS0_BASE_ADDR + 0x00001000)
@@ -122,100 +105,100 @@
 #define MACNET1_BASE_ADDR	(AIPS1_BASE_ADDR + 0x00051000)
 
 /* WEIM CSnGCR1 */
-#define CSEN		1
-#define SWR		(1 << 1)
-#define SRD		(1 << 2)
-#define MUM		(1 << 3)
-#define WFL		(1 << 4)
-#define RFL		(1 << 5)
-#define CRE		(1 << 6)
-#define CREP		(1 << 7)
-#define BL(x)		(((x) & 0x7) << 8)
-#define WC		(1 << 11)
-#define BCD(x)		(((x) & 0x3) << 12)
-#define BCS(x)		(((x) & 0x3) << 14)
-#define DSZ(x)		(((x) & 0x7) << 16)
-#define SP		(1 << 19)
-#define CSREC(x)	(((x) & 0x7) << 20)
-#define AUS		(1 << 23)
-#define GBC(x)		(((x) & 0x7) << 24)
-#define WP		(1 << 27)
-#define PSZ(x)		(((x) & 0x0f << 28)
+#define CSEN			1
+#define SWR			(1 << 1)
+#define SRD			(1 << 2)
+#define MUM			(1 << 3)
+#define WFL			(1 << 4)
+#define RFL			(1 << 5)
+#define CRE			(1 << 6)
+#define CREP			(1 << 7)
+#define BL(x)			(((x) & 0x7) << 8)
+#define WC			(1 << 11)
+#define BCD(x)			(((x) & 0x3) << 12)
+#define BCS(x)			(((x) & 0x3) << 14)
+#define DSZ(x)			(((x) & 0x7) << 16)
+#define SP			(1 << 19)
+#define CSREC(x)		(((x) & 0x7) << 20)
+#define AUS			(1 << 23)
+#define GBC(x)			(((x) & 0x7) << 24)
+#define WP			(1 << 27)
+#define PSZ(x)			(((x) & 0x0f << 28)
 
 /* WEIM CSnGCR2 */
-#define ADH(x)		(((x) & 0x3))
-#define DAPS(x)		(((x) & 0x0f << 4)
-#define DAE		(1 << 8)
-#define DAP		(1 << 9)
-#define MUX16_BYP	(1 << 12)
+#define ADH(x)			(((x) & 0x3))
+#define DAPS(x)			(((x) & 0x0f << 4)
+#define DAE			(1 << 8)
+#define DAP			(1 << 9)
+#define MUX16_BYP		(1 << 12)
 
 /* WEIM CSnRCR1 */
-#define RCSN(x)		(((x) & 0x7))
-#define RCSA(x)		(((x) & 0x7) << 4)
-#define OEN(x)		(((x) & 0x7) << 8)
-#define OEA(x)		(((x) & 0x7) << 12)
-#define RADVN(x)	(((x) & 0x7) << 16)
-#define RAL		(1 << 19)
-#define RADVA(x)	(((x) & 0x7) << 20)
-#define RWSC(x)		(((x) & 0x3f) << 24)
+#define RCSN(x)			(((x) & 0x7))
+#define RCSA(x)			(((x) & 0x7) << 4)
+#define OEN(x)			(((x) & 0x7) << 8)
+#define OEA(x)			(((x) & 0x7) << 12)
+#define RADVN(x)		(((x) & 0x7) << 16)
+#define RAL			(1 << 19)
+#define RADVA(x)		(((x) & 0x7) << 20)
+#define RWSC(x)			(((x) & 0x3f) << 24)
 
 /* WEIM CSnRCR2 */
-#define RBEN(x)		(((x) & 0x7))
-#define RBE		(1 << 3)
-#define RBEA(x)		(((x) & 0x7) << 4)
-#define RL(x)		(((x) & 0x3) << 8)
-#define PAT(x)		(((x) & 0x7) << 12)
-#define APR		(1 << 15)
+#define RBEN(x)			(((x) & 0x7))
+#define RBE			(1 << 3)
+#define RBEA(x)			(((x) & 0x7) << 4)
+#define RL(x)			(((x) & 0x3) << 8)
+#define PAT(x)			(((x) & 0x7) << 12)
+#define APR			(1 << 15)
 
 /* WEIM CSnWCR1 */
-#define WCSN(x)		(((x) & 0x7))
-#define WCSA(x)		(((x) & 0x7) << 3)
-#define WEN(x)		(((x) & 0x7) << 6)
-#define WEA(x)		(((x) & 0x7) << 9)
-#define WBEN(x)		(((x) & 0x7) << 12)
-#define WBEA(x)		(((x) & 0x7) << 15)
-#define WADVN(x)	(((x) & 0x7) << 18)
-#define WADVA(x)	(((x) & 0x7) << 21)
-#define WWSC(x)		(((x) & 0x3f) << 24)
-#define WBED1		(1 << 30)
-#define WAL		(1 << 31)
+#define WCSN(x)			(((x) & 0x7))
+#define WCSA(x)			(((x) & 0x7) << 3)
+#define WEN(x)			(((x) & 0x7) << 6)
+#define WEA(x)			(((x) & 0x7) << 9)
+#define WBEN(x)			(((x) & 0x7) << 12)
+#define WBEA(x)			(((x) & 0x7) << 15)
+#define WADVN(x)		(((x) & 0x7) << 18)
+#define WADVA(x)		(((x) & 0x7) << 21)
+#define WWSC(x)			(((x) & 0x3f) << 24)
+#define WBED1			(1 << 30)
+#define WAL			(1 << 31)
 
 /* WEIM CSnWCR2 */
-#define WBED		1
+#define WBED			1
 
 /* WEIM WCR */
-#define BCM		1
-#define GBCD(x)		(((x) & 0x3) << 1)
-#define INTEN		(1 << 4)
-#define INTPOL		(1 << 5)
-#define WDOG_EN		(1 << 8)
-#define WDOG_LIMIT(x)	(((x) & 0x3) << 9)
+#define BCM			1
+#define GBCD(x)			(((x) & 0x3) << 1)
+#define INTEN			(1 << 4)
+#define INTPOL			(1 << 5)
+#define WDOG_EN			(1 << 8)
+#define WDOG_LIMIT(x)		(((x) & 0x3) << 9)
 
 /* Number of GPIO pins per port */
-#define GPIO_NUM_PIN            32
+#define GPIO_NUM_PIN		32
 
-#define IIM_SREV	0x24
-#define ROM_SI_REV	0x48
+#define IIM_SREV		0x24
+#define ROM_SI_REV		0x80
 
-#define NFC_BUF_SIZE	0x1000
+#define NFC_BUF_SIZE		0x1000
 
-#define CHIP_REV_1_0            0x10
-#define CHIP_REV_1_1            0x11
-#define CHIP_REV_2_0            0x20
+#define CHIP_REV_1_0		0x10
+#define CHIP_REV_1_1		0x11
+#define CHIP_REV_2_0		0x20
 #define CHIP_REV_2_5		0x25
-#define CHIP_REV_3_0            0x30
+#define CHIP_REV_3_0		0x30
 
-#define BOARD_REV_1_0           0x0
-#define BOARD_REV_2_0           0x1
+#define BOARD_REV_1_0		0x0
+#define BOARD_REV_2_0		0x1
 
-//#define IMX_IIM_BASE            (IIM_BASE_ADDR)
+//#define IMX_IIM_BASE		(IIM_BASE_ADDR)
 
 #if !(defined(__KERNEL_STRICT_NAMES) || defined(__ASSEMBLY__))
 #include <asm/types.h>
 
-#define __REG(x)	(*((volatile u32 *)(x)))
-#define __REG16(x)	(*((volatile u16 *)(x)))
-#define __REG8(x)	(*((volatile u8 *)(x)))
+#define __REG(x)		(*((volatile u32 *)(x)))
+#define __REG16(x)		(*((volatile u16 *)(x)))
+#define __REG8(x)		(*((volatile u8 *)(x)))
 
 struct clkctl {
 	u32 ccr;	/* 0x00 */
@@ -358,12 +341,29 @@ struct iomuxc {
 
 /* System Reset Controller (SRC) */
 struct src {
-	u32	scr;
-	u32	sbmr;
-	u32	srsr;
-	u32	reserved1[2];
-	u32	sisr;
-	u32	simr;
+	u32 scr;	/* 0x00 */
+	u32 sbmr1;	/* 0x04 */
+	u32 srsr;	/* 0x08 */
+	u32 secr;	/* 0x0C */
+	u32 gpsr;	/* 0x10 */
+	u32 sicr;	/* 0x14 */
+	u32 simr;	/* 0x18 */
+	u32 sbmr2;	/* 0x1C */
+	u32 gpr0;	/* 0x20 */
+	u32 gpr1;	/* 0x24 */
+	u32 gpr2;	/* 0x28 */
+	u32 gpr3;	/* 0x2C */
+	u32 gpr4;	/* 0x30 */
+	u32 hab0;	/* 0x34 */
+	u32 hab1;	/* 0x38 */
+	u32 hab2;	/* 0x3C */
+	u32 hab3;	/* 0x40 */
+	u32 hab4;	/* 0x44 */
+	u32 hab5;	/* 0x48 */
+	u32 misc0;	/* 0x4C */
+	u32 misc1;	/* 0x50 */
+	u32 misc2;	/* 0x54 */
+	u32 misc3;	/* 0x58 */
 };
 
 struct fuse_bank1_regs {
@@ -617,81 +617,81 @@ struct fuse_bank1_regs {
 //
 // PHY
 //
-#define DDR_PHY000              (DDR_PHY_BASE + 0x000)
-#define DDR_PHY001              (DDR_PHY_BASE + 0x004)
-#define DDR_PHY002              (DDR_PHY_BASE + 0x008)
-#define DDR_PHY003              (DDR_PHY_BASE + 0x00C)
-#define DDR_PHY004              (DDR_PHY_BASE + 0x010)
-#define DDR_PHY005              (DDR_PHY_BASE + 0x014)
-#define DDR_PHY006              (DDR_PHY_BASE + 0x018)
-#define DDR_PHY007              (DDR_PHY_BASE + 0x01C)
-#define DDR_PHY008              (DDR_PHY_BASE + 0x020)
-#define DDR_PHY009              (DDR_PHY_BASE + 0x024)
+#define DDR_PHY000		(DDR_PHY_BASE + 0x000)
+#define DDR_PHY001		(DDR_PHY_BASE + 0x004)
+#define DDR_PHY002		(DDR_PHY_BASE + 0x008)
+#define DDR_PHY003		(DDR_PHY_BASE + 0x00C)
+#define DDR_PHY004		(DDR_PHY_BASE + 0x010)
+#define DDR_PHY005		(DDR_PHY_BASE + 0x014)
+#define DDR_PHY006		(DDR_PHY_BASE + 0x018)
+#define DDR_PHY007		(DDR_PHY_BASE + 0x01C)
+#define DDR_PHY008		(DDR_PHY_BASE + 0x020)
+#define DDR_PHY009		(DDR_PHY_BASE + 0x024)
 
-#define DDR_PHY010              (DDR_PHY_BASE + 0x028)
-#define DDR_PHY011              (DDR_PHY_BASE + 0x02C)
-#define DDR_PHY012              (DDR_PHY_BASE + 0x030)
-#define DDR_PHY013              (DDR_PHY_BASE + 0x034)
-#define DDR_PHY014              (DDR_PHY_BASE + 0x038)
-#define DDR_PHY015              (DDR_PHY_BASE + 0x03C)
-#define DDR_PHY016              (DDR_PHY_BASE + 0x040)
-#define DDR_PHY017              (DDR_PHY_BASE + 0x044)
-#define DDR_PHY018              (DDR_PHY_BASE + 0x048)
-#define DDR_PHY019              (DDR_PHY_BASE + 0x04C)
+#define DDR_PHY010		(DDR_PHY_BASE + 0x028)
+#define DDR_PHY011		(DDR_PHY_BASE + 0x02C)
+#define DDR_PHY012		(DDR_PHY_BASE + 0x030)
+#define DDR_PHY013		(DDR_PHY_BASE + 0x034)
+#define DDR_PHY014		(DDR_PHY_BASE + 0x038)
+#define DDR_PHY015		(DDR_PHY_BASE + 0x03C)
+#define DDR_PHY016		(DDR_PHY_BASE + 0x040)
+#define DDR_PHY017		(DDR_PHY_BASE + 0x044)
+#define DDR_PHY018		(DDR_PHY_BASE + 0x048)
+#define DDR_PHY019		(DDR_PHY_BASE + 0x04C)
 
-#define DDR_PHY020              (DDR_PHY_BASE + 0x050)
-#define DDR_PHY021              (DDR_PHY_BASE + 0x054)
-#define DDR_PHY022              (DDR_PHY_BASE + 0x058)
-#define DDR_PHY023              (DDR_PHY_BASE + 0x05C)
-#define DDR_PHY024              (DDR_PHY_BASE + 0x060)
-#define DDR_PHY025              (DDR_PHY_BASE + 0x064)
-#define DDR_PHY026              (DDR_PHY_BASE + 0x068)
-#define DDR_PHY027              (DDR_PHY_BASE + 0x06C)
-#define DDR_PHY028              (DDR_PHY_BASE + 0x070)
-#define DDR_PHY029              (DDR_PHY_BASE + 0x074)
+#define DDR_PHY020		(DDR_PHY_BASE + 0x050)
+#define DDR_PHY021		(DDR_PHY_BASE + 0x054)
+#define DDR_PHY022		(DDR_PHY_BASE + 0x058)
+#define DDR_PHY023		(DDR_PHY_BASE + 0x05C)
+#define DDR_PHY024		(DDR_PHY_BASE + 0x060)
+#define DDR_PHY025		(DDR_PHY_BASE + 0x064)
+#define DDR_PHY026		(DDR_PHY_BASE + 0x068)
+#define DDR_PHY027		(DDR_PHY_BASE + 0x06C)
+#define DDR_PHY028		(DDR_PHY_BASE + 0x070)
+#define DDR_PHY029		(DDR_PHY_BASE + 0x074)
 
-#define DDR_PHY030              (DDR_PHY_BASE + 0x078)
-#define DDR_PHY031              (DDR_PHY_BASE + 0x07C)
-#define DDR_PHY032              (DDR_PHY_BASE + 0x080)
-#define DDR_PHY033              (DDR_PHY_BASE + 0x084)
-#define DDR_PHY034              (DDR_PHY_BASE + 0x088)
-#define DDR_PHY035              (DDR_PHY_BASE + 0x08C)
-#define DDR_PHY036              (DDR_PHY_BASE + 0x090)
-#define DDR_PHY037              (DDR_PHY_BASE + 0x094)
-#define DDR_PHY038              (DDR_PHY_BASE + 0x098)
-#define DDR_PHY039              (DDR_PHY_BASE + 0x09C)
+#define DDR_PHY030		(DDR_PHY_BASE + 0x078)
+#define DDR_PHY031		(DDR_PHY_BASE + 0x07C)
+#define DDR_PHY032		(DDR_PHY_BASE + 0x080)
+#define DDR_PHY033		(DDR_PHY_BASE + 0x084)
+#define DDR_PHY034		(DDR_PHY_BASE + 0x088)
+#define DDR_PHY035		(DDR_PHY_BASE + 0x08C)
+#define DDR_PHY036		(DDR_PHY_BASE + 0x090)
+#define DDR_PHY037		(DDR_PHY_BASE + 0x094)
+#define DDR_PHY038		(DDR_PHY_BASE + 0x098)
+#define DDR_PHY039		(DDR_PHY_BASE + 0x09C)
 
-#define DDR_PHY040              (DDR_PHY_BASE + 0x0A0)
-#define DDR_PHY041              (DDR_PHY_BASE + 0x0A4)
-#define DDR_PHY042              (DDR_PHY_BASE + 0x0A8)
-#define DDR_PHY043              (DDR_PHY_BASE + 0x0AC)
-#define DDR_PHY044              (DDR_PHY_BASE + 0x0B0)
-#define DDR_PHY045              (DDR_PHY_BASE + 0x0B4)
-#define DDR_PHY046              (DDR_PHY_BASE + 0x0B8)
-#define DDR_PHY047              (DDR_PHY_BASE + 0x0BC)
-#define DDR_PHY048              (DDR_PHY_BASE + 0x0C0)
-#define DDR_PHY049              (DDR_PHY_BASE + 0x0C4)
+#define DDR_PHY040		(DDR_PHY_BASE + 0x0A0)
+#define DDR_PHY041		(DDR_PHY_BASE + 0x0A4)
+#define DDR_PHY042		(DDR_PHY_BASE + 0x0A8)
+#define DDR_PHY043		(DDR_PHY_BASE + 0x0AC)
+#define DDR_PHY044		(DDR_PHY_BASE + 0x0B0)
+#define DDR_PHY045		(DDR_PHY_BASE + 0x0B4)
+#define DDR_PHY046		(DDR_PHY_BASE + 0x0B8)
+#define DDR_PHY047		(DDR_PHY_BASE + 0x0BC)
+#define DDR_PHY048		(DDR_PHY_BASE + 0x0C0)
+#define DDR_PHY049		(DDR_PHY_BASE + 0x0C4)
 
-#define DDR_PHY050              (DDR_PHY_BASE + 0x0C8)
-#define DDR_PHY051              (DDR_PHY_BASE + 0x0CC)
-#define DDR_PHY052              (DDR_PHY_BASE + 0x0D0)
-#define DDR_PHY053              (DDR_PHY_BASE + 0x0D4)
-#define DDR_PHY054              (DDR_PHY_BASE + 0x0D8)
-#define DDR_PHY055              (DDR_PHY_BASE + 0x0DC)
-#define DDR_PHY056              (DDR_PHY_BASE + 0x0E0)
-#define DDR_PHY057              (DDR_PHY_BASE + 0x0E4)
-#define DDR_PHY058              (DDR_PHY_BASE + 0x0E8)
-#define DDR_PHY059              (DDR_PHY_BASE + 0x0EC)
+#define DDR_PHY050		(DDR_PHY_BASE + 0x0C8)
+#define DDR_PHY051		(DDR_PHY_BASE + 0x0CC)
+#define DDR_PHY052		(DDR_PHY_BASE + 0x0D0)
+#define DDR_PHY053		(DDR_PHY_BASE + 0x0D4)
+#define DDR_PHY054		(DDR_PHY_BASE + 0x0D8)
+#define DDR_PHY055		(DDR_PHY_BASE + 0x0DC)
+#define DDR_PHY056		(DDR_PHY_BASE + 0x0E0)
+#define DDR_PHY057		(DDR_PHY_BASE + 0x0E4)
+#define DDR_PHY058		(DDR_PHY_BASE + 0x0E8)
+#define DDR_PHY059		(DDR_PHY_BASE + 0x0EC)
 
-#define DDR_PHY060              (DDR_PHY_BASE + 0x0F0)
-#define DDR_PHY061              (DDR_PHY_BASE + 0x0F4)
-#define DDR_PHY062              (DDR_PHY_BASE + 0x0F8)
-#define DDR_PHY063              (DDR_PHY_BASE + 0x0FC)
-#define DDR_PHY064              (DDR_PHY_BASE + 0x100)
-#define DDR_PHY065              (DDR_PHY_BASE + 0x104)
-#define DDR_PHY066              (DDR_PHY_BASE + 0x108)
-#define DDR_PHY067              (DDR_PHY_BASE + 0x10C)
-#define DDR_PHY068              (DDR_PHY_BASE + 0x110)
+#define DDR_PHY060		(DDR_PHY_BASE + 0x0F0)
+#define DDR_PHY061		(DDR_PHY_BASE + 0x0F4)
+#define DDR_PHY062		(DDR_PHY_BASE + 0x0F8)
+#define DDR_PHY063		(DDR_PHY_BASE + 0x0FC)
+#define DDR_PHY064		(DDR_PHY_BASE + 0x100)
+#define DDR_PHY065		(DDR_PHY_BASE + 0x104)
+#define DDR_PHY066		(DDR_PHY_BASE + 0x108)
+#define DDR_PHY067		(DDR_PHY_BASE + 0x10C)
+#define DDR_PHY068		(DDR_PHY_BASE + 0x110)
 
 #endif /* __ASSEMBLER__*/
 

@@ -73,8 +73,9 @@
 
 #define CONFIG_CMD_BDI		/* bdinfo */
 #define CONFIG_CMD_BOOTD
-#define CONFIG_CMD_DHCP
 #define CONFIG_CMD_CONSOLE	/* coninfo */
+#define CONFIG_CMD_DHCP
+#define CONFIG_CMD_ELF
 #define CONFIG_CMD_MEMORY	/* md mm nm mw cp cmp crc base loop mtest */
 #define CONFIG_CMD_MISC
 #define CONFIG_CMD_MII
@@ -163,7 +164,7 @@
 #define CONFIG_SYS_LONGHELP		/* undef to save memory */
 #define CONFIG_SYS_HUSH_PARSER		/* use "hush" command parser */
 #define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
-#define CONFIG_SYS_PROMPT		"VyBrid U-Boot > "
+#define CONFIG_SYS_PROMPT		"Vybrid U-Boot > "
 #undef CONFIG_AUTO_COMPLETE
 #define CONFIG_SYS_CBSIZE		256	/* Console I/O Buffer Size */
 /* Print Buffer Size */
@@ -227,7 +228,7 @@
 #define CONFIG_SYS_CLKCTRL_CSCDR1	0x01000000
 #define CONFIG_SYS_CLKCTRL_CSCDR2	0x30110000
 #define CONFIG_SYS_CLKCTRL_CSCDR3	0x00001F1F
-#define CONFIG_SYS_CLKCTRL_CSCMR2	0x00000030
+#define CONFIG_SYS_CLKCTRL_CSCMR2	0x00000000
 #define CONFIG_SYS_CLKCTRL_CSCDR4	0x00000000
 #define CONFIG_SYS_CLKCTRL_CLPCR	0x00000078
 

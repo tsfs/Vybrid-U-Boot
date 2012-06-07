@@ -313,7 +313,6 @@ unsigned long ddr_ctrl_init(void)
 	port = ((__raw_readl(DDR_CR078) >> 8) & 1) ? 1 : 2;
 
 	dram_size = (1 << (rows + cols)) * banks * port;
-	printf("dram_size %x\n", dram_size);
 
 	return dram_size;
 }
@@ -464,7 +463,7 @@ int board_late_init(void)
 
 int checkboard(void)
 {
-	puts("Board: VyBrid\n");
+	puts("Board: Vybrid\n");
 
 	return 0;
 }

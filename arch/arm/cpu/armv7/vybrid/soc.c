@@ -38,23 +38,10 @@
 
 u32 get_cpu_rev(void)
 {
-	int system_rev = 0x51000;
+	int system_rev = 0x600000;
 	int reg = __raw_readl(ROM_SI_REV);
 
-	switch (reg) {
-	case 0x02:
-		system_rev |= CHIP_REV_1_1;
-		break;
-	case 0x10:
-		break;
-	case 0x20:
-		system_rev |= CHIP_REV_3_0;
-		break;
-	default:
-		system_rev |= CHIP_REV_1_0;
-		break;
-	}
-
+	system_rev |= reg;
 	return system_rev;
 }
 
