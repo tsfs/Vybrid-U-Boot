@@ -235,6 +235,10 @@ unsigned long ddr_ctrl_init(void)
 						 * ctrller busy
 						 * in_ord_accept */
 
+	/* disable interrupts */
+//	__raw_writel(0x0FFFFFFF, DDR_CR082);
+
+
 	/* ODT */
 	__raw_writel(0x01010000, DDR_CR087);	/* odt: wr_map_cs0
 						 * rd_map_cs0
