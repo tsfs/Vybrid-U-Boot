@@ -236,7 +236,7 @@ unsigned long ddr_ctrl_init(void)
 						 * in_ord_accept */
 
 	/* disable interrupts */
-//	__raw_writel(0x0FFFFFFF, DDR_CR082);
+	__raw_writel(0x1FFFFFFF, DDR_CR082);
 
 
 	/* ODT */
@@ -321,12 +321,18 @@ int dram_init(void)
 
 void setup_iomux_uart(void)
 {
-	__raw_writel(0x002011a2, IOMUXC_PAD_026);
-	__raw_writel(0x002011a1, IOMUXC_PAD_027);
-	__raw_writel(0x002011a2, IOMUXC_PAD_028);
-	__raw_writel(0x002011a1, IOMUXC_PAD_029);
+#if (CONFIG_SYS_UART_PORT == 0)
 	__raw_writel(0x001011a2, IOMUXC_PAD_032);
 	__raw_writel(0x001011a1, IOMUXC_PAD_033);
+#endif
+#if (CONFIG_SYS_UART_PORT == 1)
+	__raw_writel(0x002011a2, IOMUXC_PAD_026);
+	__raw_writel(0x002011a1, IOMUXC_PAD_027);
+#endif
+#if (CONFIG_SYS_UART_PORT == 2)
+	__raw_writel(0x007011a2, IOMUXC_PAD_028);
+	__raw_writel(0x007011a1, IOMUXC_PAD_029);
+#endif
 }
 
 #if defined(CONFIG_CMD_NET)

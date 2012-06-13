@@ -38,7 +38,7 @@
 
 static char *get_reset_cause(void)
 {
-	char resetcause[32][64] = {"POR",
+	char resetcause[32][100] = {"POR",
 				   "Cortex A5 WDOG Timer Reset",
 				   0,
 				   "CA5 WDOG reset",
