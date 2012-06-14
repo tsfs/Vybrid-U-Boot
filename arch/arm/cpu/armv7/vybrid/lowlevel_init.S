@@ -24,15 +24,6 @@
 #include <asm/arch/vybrid-regs.h>
 #include <generated/asm-offsets.h>
 
-/* VFPU setup/invalidation/disable */
-.macro init_vfpu
-	ldr r0, =(0xF << 20)
-	mcr p15, 0, r0, c1, c0, 2
-	mov r3, #0x40000000
-	.long 0xeee83a10
-//	vmsr FPEXC, r3
-.endm /* init_vfpu */
-
 /* L2CC Cache setup/invalidation/disable */
 .macro init_l2cc
 	/* explicitly disable L2 cache */
@@ -47,9 +38,6 @@
 	orr r0, r0, #(1 << 23)		/* disable write allocate combine */
 	orr r0, r0, #(1 << 22)		/* disable write allocate */
 
-	ldr r1, =0x00000000
-	ldr r3, [r1, #ROM_SI_REV]	/* problem ********* */
-	cmp r3, #0x10    /* r3 contains the silicon rev */
 	orrls r0, r0, #(1 << 25)	/* disable write combine for TO 2 and lower revs */
 
 	mcr 15, 1, r0, c9, c0, 2
@@ -181,13 +169,9 @@ lowlevel_init:
 	orr r1, r1, #(1 << 5)    /* enable L1NEON bit */
 	mcr 15, 0, r1, c1, c0, 1
 
-//	init_vfpu
-
 //	init_l2cc
 
-//	init_aips
-
-//	init_max
+	init_aips
 
 //	init_m4if
 

@@ -100,11 +100,12 @@ int print_cpuinfo(void)
 	u32 cpurev;
 
 	cpurev = get_cpu_rev();
-	printf("CPU:   Freescale VyBrid %x family rev%d.%d at %d MHz\n",
+	printf("CPU:   Freescale VyBrid %x family rev%d.%d at 396 MHz\n",
 		(cpurev & 0xFFF000) >> 12,
 		(cpurev & 0x000F0) >> 4,
-		(cpurev & 0x0000F) >> 0,
-		vybrid_get_clock(VYBRID_ARM_CLK) / 1000000);
+		(cpurev & 0x0000F) >> 0);
+//		(cpurev & 0x0000F) >> 0,
+//		vybrid_get_clock(VYBRID_ARM_CLK) / 1000000);
 	if (get_reset_cause() != NULL)
 		printf("Reset cause: %s\n", get_reset_cause());
 	return 0;

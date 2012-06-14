@@ -35,7 +35,6 @@
 #define CONFIG_DISPLAY_CPUINFO
 #define CONFIG_DISPLAY_BOARDINFO
 
-#define CONFIG_SYS_ICACHE_OFF
 #define CONFIG_SYS_CACHELINE_SIZE	64
 
 #include <asm/arch/vybrid-regs.h>
@@ -49,7 +48,7 @@
 #undef CONFIG_SETUP_MEMORY_TAGS
 #undef CONFIG_INITRD_TAG
 
-#undef CONFIG_OF_LIBFDT
+#define CONFIG_OF_LIBFDT
 
 #define CONFIG_MACH_TYPE		MACH_TYPE_VYBRID_VF6XX
 /* Size of malloc() pool */
@@ -60,7 +59,6 @@
 /* Hardware drivers */
 #define CONFIG_VYBRID_UART
 #define CONFIG_VYBRID_UART_BASE		UART0_BASE
-#define CONFIG_VYBRID_GPIO
 
 /* allow to overwrite serial and ethaddr */
 #define CONFIG_ENV_OVERWRITE
@@ -73,6 +71,7 @@
 
 #define CONFIG_CMD_BDI		/* bdinfo */
 #define CONFIG_CMD_BOOTD
+#define CONFIG_CMD_CACHE
 #define CONFIG_CMD_CONSOLE	/* coninfo */
 #define CONFIG_CMD_DHCP
 #define CONFIG_CMD_ELF
@@ -98,7 +97,6 @@
 #define CONFIG_SYS_FSL_ESDHC_NUM	1
 //#define CONFIG_MMC_TRACE
 
-//#define CONFIG_ESDHC_DETECT_USE_EXTERN_IRQ1
 #define CONFIG_SYS_FSL_ERRATUM_ESDHC135
 #define CONFIG_SYS_FSL_ERRATUM_ESDHC111
 #define CONFIG_SYS_FSL_ERRATUM_ESDHC_A001
@@ -132,16 +130,7 @@
 #	define CONFIG_ETHADDR		00:e0:0c:bc:e5:60
 #	define CONFIG_ETH1ADDR		00:e0:0c:bc:e5:61
 #	define CONFIG_ETHPRIME		"FEC0"
-#	define CONFIG_IPADDR		10.81.67.175
-#	define CONFIG_NETMASK		255.255.252.0
-#	define CONFIG_SERVERIP		10.81.64.153
-#	define CONFIG_GATEWAYIP		10.81.67.254
-/*
-#	define CONFIG_IPADDR		192.162.1.2
-#	define CONFIG_NETMASK		255.255.255.0
-#	define CONFIG_SERVERIP		192.162.1.1
-#	define CONFIG_GATEWAYIP		192.162.1.1
-*/
+
 #	define CONFIG_OVERWRITE_ETHADDR_ONCE
 
 /* If CONFIG_SYS_DISCOVER_PHY is not defined - hardcoded */
@@ -260,8 +249,7 @@
 
 #define CONFIG_ENV_OFFSET		(6 * 64 * 1024)
 #define CONFIG_ENV_SIZE			(8 * 1024)
-#undef CONFIG_ENV_IS_IN_MMC
-#define CONFIG_ENV_IS_NOWHERE
+#define CONFIG_ENV_IS_IN_MMC
 #define CONFIG_SYS_MMC_ENV_DEV		0
 
 #endif
